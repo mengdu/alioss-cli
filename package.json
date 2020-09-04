@@ -1,5 +1,5 @@
 {
-  "name": "alioss-cli",
+  "name": "@lanyue/alioss-cli",
   "version": "0.1.0",
   "description": "Aliyun oss cli",
   "main": "lib.js",
@@ -12,12 +12,22 @@
   "keywords": [
     "alioss-cli"
   ],
-  "author": "lanyueos@qq.com",
-  "license": "MIT",
+  "repository": {
+    "type": "https",
+    "url": "git+https://github.com/mengdu/alioss-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/mengdu/alioss-cli/issues"
+  },
+  "author": {
+    "name": "Lanyue",
+    "email": "lanyueos@qq.com"
+  },
   "dependencies": {
     "ali-oss": "^6.10.0",
     "chalk": "^4.1.0",
     "commander": "^6.1.0",
     "glob": "^7.1.6"
-  }
+  },
+  "license": "MIT"
 }

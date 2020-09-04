@@ -2,8 +2,9 @@
   "name": "alioss-cli",
   "version": "0.1.0",
   "description": "Aliyun oss cli",
+  "main": "lib.js",
   "bin": {
-    "alioss-cli": "index.js"
+    "alioss": "index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "ali-oss": "^6.10.0",
+    "chalk": "^4.1.0",
     "commander": "^6.1.0",
     "glob": "^7.1.6"
   }

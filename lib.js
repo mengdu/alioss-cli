@@ -22,7 +22,7 @@ module.exports = async function upload (options) {
 
     for (let i = 0, len = files.length; i < len; i++) {
         const file = path.resolve(options.from, files[i])
-        const objName = file.replace(options.from, options.to || '/').replace(/^[/\\]/g, '')
+        const objName = file.replace(options.from, options.to || '/').replace(/(\\|\/)+/g, '/').replace(/^[/\\]/g, '')
         const result = await store.put(objName, fs.createReadStream(file))
 
         if (typeof options.progress === 'function') {

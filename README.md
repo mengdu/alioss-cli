@@ -9,7 +9,7 @@ npm install -g @lanyue/alioss-cli
 ## Usage
 
 ```sh
-alioss dir -d /demo
+alioss dir --dest=demo
 ```
 
 ```txt

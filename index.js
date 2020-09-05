@@ -91,7 +91,7 @@ async function main() {
         from: cwd,
         to: dest,
         progress: (i, file, result, len) => {
-            console.log(`${i + 1}${chalk.gray('/')}${len} ${file} ${chalk.gray('➜')} ${chalk.green(result.url)}`)
+            console.log(`${chalk.cyan(i + 1)}${chalk.gray('/')}${len} ${file} ${chalk.gray('➜')} ${chalk.green(result.url)}`)
         }
     })
 

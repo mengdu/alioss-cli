@@ -6,7 +6,7 @@ const path = require('path')
 
 /**
  * @param {object} options
- * @param {string} options.from - dir path
+ * @param {string} options.from - Dir path or filePath
  * @param {string} [options.to] - upload to path; default '/'
  * @param {object} options.oss - options for ali-oss
  * @param {object} options.glob - options for glob
@@ -14,15 +14,26 @@ const path = require('path')
  * @returns {Promise<number>}
  * **/
 module.exports = async function upload (options) {
-    const files = await util.promisify(glob)('**/*', { cwd: options.from, nodir: true, ...options.glob })
+    let files = []
+    const stat = await util.promisify(fs.stat)(options.from)
+    let from = options.from
+    const to = options.to + '/'
+
+    if (stat.isFile()) {
+        files = [options.from]
+        from = options.from.replace(path.basename(options.from), '')
+    } else {
+        files = await util.promisify(glob)('**/*', { cwd: from, nodir: true, ...options.glob })
+    }
 
     if (files.length === 0) return 0
 
     const store = new OSS(options.oss)
 
     for (let i = 0, len = files.length; i < len; i++) {
-        const file = path.resolve(options.from, files[i])
-        const objName = file.replace(options.from, options.to || '/').replace(/(\\|\/)+/g, '/').replace(/^[/\\]/g, '')
+        const file = path.resolve(from, files[i])
+        const objName = file.replace(from, to || '/').replace(/(\\|\/)+/g, '/').replace(/^[/\\]/g, '')
+
         const result = await store.put(objName, fs.createReadStream(file))
 
         if (typeof options.progress === 'function') {
